@@ -172,6 +172,7 @@ SbkObjectType SbkObject_Type = { { {
 
 void SbkDeallocWrapper(PyObject* pyObj)
 {
+    printf("DESTROY CPP: %p\n", pyObj);
     SbkObject* sbkObj = reinterpret_cast<SbkObject*>(pyObj);
     if (sbkObj->weakreflist)
         PyObject_ClearWeakRefs(pyObj);
@@ -1033,6 +1034,7 @@ void setParent(PyObject* parent, PyObject* child)
 
 void deallocData(SbkObject* self, bool cleanup)
 {
+    printf("WILL DEALLOC: %p:%d\n", self, cleanup);
     // Make cleanup if this is not a wrapper otherwise this will be done on wrapper destructor
     if(cleanup) {
         removeParent(self);

@@ -26,8 +26,8 @@
 
 '''Tests ObjectType class of object-type with privates copy constructor and = operator.'''
 
-import sys
 import unittest
+import sys
 
 from sample import ObjectType, Str
 
@@ -35,6 +35,7 @@ from sample import ObjectType, Str
 class ObjectTypeTest(unittest.TestCase):
     '''Test cases  ObjectType class of object-type with privates copy constructor and = operator.'''
 
+    """
     def testObjectTypeSetObjectNameWithStrVariable(self):
         '''ObjectType.setObjectName with Str variable as argument.'''
         s = Str('object name')
@@ -61,6 +62,27 @@ class ObjectTypeTest(unittest.TestCase):
         self.assertEqual(o.callId(), 0)
         o.setNullObject(None)
         self.assertEqual(o.callId(), 1)
+    """
+
+    def testParentFromCpp(self):
+        o = ObjectType()
+        print "obj", o
+        p = o.getCppParent()
+        del p
+        o.getCppParent().setObjectName('parent')
+        o.getCppParent().setObjectName('parent')
+        o.getCppParent().setObjectName('parent')
+        o.getCppParent().setObjectName('parent')
+        o.getCppParent().setObjectName('parent')
+        o.setObjectName('child')
+        '''
+        self.assertEqual(o.getCppParent().objectName(), 'parent')
+        self.assertEqual(o.getCppParent().objectName(), 'parent')
+        self.assertEqual(o.getCppParent().objectName(), 'parent')
+        self.assertEqual(o.getCppParent().objectName(), 'parent')
+        self.assertEqual(o.objectName(), 'child')
+        '''
+        del o
 
 if __name__ == '__main__':
     unittest.main()
